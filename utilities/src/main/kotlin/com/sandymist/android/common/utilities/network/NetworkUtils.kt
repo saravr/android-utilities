@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package com.sandymist.android.common.utilities
+package com.sandymist.android.common.utilities.network
 
 import android.content.Context
 import android.net.ConnectivityManager

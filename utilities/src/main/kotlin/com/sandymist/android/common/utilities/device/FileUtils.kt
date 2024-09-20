@@ -1,8 +1,9 @@
 @file:Suppress("unused")
 
-package com.sandymist.android.common.utilities
+package com.sandymist.android.common.utilities.device
 
 import android.content.Context
+import com.sandymist.android.common.utilities.R
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.Locale

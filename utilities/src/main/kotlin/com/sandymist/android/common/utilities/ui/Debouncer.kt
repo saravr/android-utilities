@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package com.sandymist.android.common.utilities
+package com.sandymist.android.common.utilities.ui
 
 import android.os.SystemClock
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -18,6 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
+const val DEFAULT_BUTTON_DEBOUNCE_IN_MS = 500L
 
 // TODO(3): need a home grown version
 /*

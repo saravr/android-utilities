@@ -1,12 +1,13 @@
 @file:Suppress("unused")
 
-package com.sandymist.android.common.utilities
+package com.sandymist.android.common.utilities.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import com.sandymist.android.common.utilities.findActivity
 
 @Suppress("unused")
 fun Modifier.conditional(condition: Boolean, modifier: Modifier.() -> Modifier) =
@@ -38,5 +39,12 @@ fun LockScreenOrientation(orientation: Int) {
             // restore original orientation when view disappears
             activity.requestedOrientation = originalOrientation
         }
+    }
+}
+
+@Composable
+fun String.ifNotEmpty(handler: @Composable (String) -> Unit) {
+    if (isNotEmpty()) {
+        handler(this)
     }
 }

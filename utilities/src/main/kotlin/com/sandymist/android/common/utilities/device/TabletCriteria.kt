@@ -1,4 +1,4 @@
-package com.sandymist.android.common.utilities
+package com.sandymist.android.common.utilities.device
 
 import android.content.Context
 import android.content.res.Configuration

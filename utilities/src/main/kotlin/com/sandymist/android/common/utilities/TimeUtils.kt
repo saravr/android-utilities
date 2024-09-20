@@ -123,7 +123,7 @@ fun Long.millisecondsToDuration(): String {
     val value = abs(this)
     val minutes = (value / 1000 / 60)
     val seconds = ((value / 1000) % 60)
-    return String.format("%s%02d:%02d", if (negative) "-" else "", minutes, seconds)
+    return String.format(Locale.getDefault(),"%s%02d:%02d", if (negative) "-" else "", minutes, seconds)
 }
 
 fun Long.toFormattedDateString(pattern: String = YEAR_MONTH_DATE_HOURS_FORMAT_PATTERN, locale: Locale = Locale.getDefault()): String {

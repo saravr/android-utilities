@@ -1,4 +1,4 @@
-package com.sandymist.android.common.utilities
+package com.sandymist.android.common.utilities.network
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -14,12 +14,6 @@ import kotlinx.coroutines.flow.flowOn
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
-
-sealed class NetworkStatus {
-    data object Unknown : NetworkStatus()
-    data object Connected : NetworkStatus()
-    data object Disconnected : NetworkStatus()
-}
 
 @Suppress("unused")
 @Singleton

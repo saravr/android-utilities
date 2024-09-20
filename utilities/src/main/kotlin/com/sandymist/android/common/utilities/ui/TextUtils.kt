@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package com.sandymist.android.common.utilities
+package com.sandymist.android.common.utilities.ui
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
