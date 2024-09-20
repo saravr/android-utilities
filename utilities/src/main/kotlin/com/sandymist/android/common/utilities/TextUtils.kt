@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.sandymist.android.common.utilities
 
 import androidx.compose.material3.Text

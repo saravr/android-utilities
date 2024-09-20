@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.sandymist.android.common.utilities
 
 import android.os.SystemClock
@@ -7,6 +9,7 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -22,14 +25,14 @@ import kotlinx.coroutines.launch
  */
 
 /**
- * Wraps an [onClick] lambda with another one that supports debouncing. The default deboucing time
+ * Wraps an [onClick] lambda with another one that supports debouncing. The default debouncing time
  * is 1000ms.
  *
  * @return debounced onClick
  */
 @Composable
 inline fun debounced(crossinline onClick: () -> Unit, debounceTime: Long = DEFAULT_BUTTON_DEBOUNCE_IN_MS): () -> Unit {
-    var lastTimeClicked by remember { mutableStateOf(0L) }
+    var lastTimeClicked by remember { mutableLongStateOf(0L) }
     val onClickLambda: () -> Unit = {
         val now = SystemClock.uptimeMillis()
         if (now - lastTimeClicked > debounceTime) {

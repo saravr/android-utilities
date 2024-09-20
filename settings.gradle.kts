@@ -20,6 +20,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "utilities"
-include(":app")
 include(":utilities")
  

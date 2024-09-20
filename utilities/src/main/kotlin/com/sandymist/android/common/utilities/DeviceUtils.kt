@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.sandymist.android.common.utilities
 
 import javax.inject.Inject

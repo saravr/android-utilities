@@ -21,6 +21,7 @@ sealed class NetworkStatus {
     data object Disconnected : NetworkStatus()
 }
 
+@Suppress("unused")
 @Singleton
 class NetworkMonitor @Inject constructor(context: Context) {
     private val connectivityManager = context.getSystemService(
