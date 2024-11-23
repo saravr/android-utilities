@@ -4,8 +4,15 @@ plugins {
     id("com.google.devtools.ksp")
     kotlin("plugin.serialization")
     id("dagger.hilt.android.plugin")
-    id("maven-publish")
+//    id("maven-publish")
+    id("signing")
+
+    id("com.vanniktech.maven.publish") version "0.28.0"
+    id("com.gradleup.nmcp") version "0.0.7"
 }
+
+group = "com.sandymist.android.common.utilities"
+version = "0.0.1"
 
 android {
     namespace = "com.sandymist.android.common.utilities"
@@ -94,18 +101,93 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 }
 
-configure<PublishingExtension> {
-    publications.create<MavenPublication>("aar") {
-        groupId = "com.sandymist.android.common"
-        artifactId = "utilities"
-        version = rootProject.extra["projectVersion"] as String
-        afterEvaluate {
-            from(components[rootProject.extra["publishComponent"] as String])
+afterEvaluate {
+
+    configure<PublishingExtension> {
+        publications.create<MavenPublication>("release") {
+            groupId = "com.sandymist.android.common"
+            artifactId = "utilities"
+            version = rootProject.extra["projectVersion"] as String
+
+            //afterEvaluate {
+            from(
+                components.findByName(rootProject.extra["publishComponent"] as String)
+                    ?: error(">>>> SoftwareComponent not found")
+            )
+//        from(components[rootProject.extra["publishComponent"] as String])
+            //}
+
+            // POM Metadata
+            pom {
+                name.set("Utilities")
+                description.set("A collection of utility functions for Android")
+                url.set("https://github.com/saravr/android-utilities")
+
+                licenses {
+                    license {
+                        name.set("The Apache License, Version 2.0")
+                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("saravr")
+                        name.set("Sarav R")
+                        email.set("saravr@yahoo.com")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:git://github.com/saravr/android-utilities.git")
+                    developerConnection.set("scm:git:ssh://github.com/saravr/android-utilities.git")
+                    url.set("https://github.com/saravr/android-utilities")
+                }
+            }
+        }
+
+        // Repositories
+        repositories {
+            mavenLocal()
+
+            maven {
+                name = "ossrh" // Sonatype OSSRH for Maven Central
+                url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+
+                credentials {
+                    username = project.findProperty("ossrhUsername") as String?
+                        ?: System.getenv("OSSRH_USERNAME")
+                    password = project.findProperty("ossrhPassword") as String?
+                        ?: System.getenv("OSSRH_PASSWORD")
+                    println("++++ username: $username")
+                    println("++++ pass: $password")
+                }
+            }
         }
     }
 
-    repositories {
-        mavenLocal()
+// Signing Configuration
+    configure<SigningExtension> {
+        val secFile = project.findProperty("signing.secretKeyFile") as String?
+        println("+++++ SEC FILE: $secFile")
+        val contents = secFile?.let { file(it).readText() }
+//        println("+++++ CONTENTS: $contents")
+        val keyid = project.findProperty("signing.keyId") as String?
+        println("+++++ KeyId: $keyid")
+        val signinpass = project.findProperty("signing.password") as String?
+        println("++++ sp: $signinpass")
+        useInMemoryPgpKeys(
+            keyid,
+            contents,
+            project.findProperty("signing.password") as String?
+        )
+        sign(publishing.publications["release"])
     }
 }
 
+tasks.register("printComponents") {
+    doLast {
+        println("++++ COMPS: " + project.components.size)
+        project.components.forEach {
+            println("++++++ Available component: ${it.name}")
+        }
+    }
+}
