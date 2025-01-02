@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 val Context.sharedPreferences: SharedPreferences
-    get() = getSharedPreferences("PodcastPrefs", Context.MODE_PRIVATE)
+    get() = getSharedPreferences("UtilitiesPrefs", Context.MODE_PRIVATE)
 
 fun Context.getPrefBoolean(key: String, defaultValue: Boolean) =
     sharedPreferences.getBoolean(key, defaultValue)
