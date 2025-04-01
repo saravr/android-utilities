@@ -13,7 +13,7 @@ buildscript {
     }
 }
 
-val projectVersion: String by extra("0.0.10")
+val projectVersion: String by extra("0.0.11")
 
 private val publishVariant: String = project.findProperty("PUBLISH_VARIANT") as String? ?: "release"
 val publishComponent: String by extra(publishVariant)
