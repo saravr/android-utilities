@@ -9,10 +9,10 @@ plugins {
 
 android {
     namespace = "com.sandymist.android.common.utilities"
-    compileSdk = 34
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = 25
+        minSdk = libs.versions.minSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -96,8 +96,8 @@ dependencies {
 
 configure<PublishingExtension> {
     publications.create<MavenPublication>("aar") {
-        groupId = "com.sandymist.android.common"
-        artifactId = "utilities"
+        groupId = "com.github.saravr"
+        artifactId = "android-utilities"
         version = rootProject.extra["projectVersion"] as String
         afterEvaluate {
             from(components[rootProject.extra["publishComponent"] as String])

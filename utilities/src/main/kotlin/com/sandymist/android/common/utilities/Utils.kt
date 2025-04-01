@@ -11,11 +11,26 @@ fun String?.encodedUrl(): String {
     return if (this != null) URLEncoder.encode(this, "UTF-8") else ""
 }
 
-// TOOD move to utilities
-fun Int?.multiply(multiplier: Int): Int {
+private const val CHAR_SET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+
+fun generateRandomString(length: Int): String {
+    return (1..length)
+        .map { CHAR_SET.random() }
+        .joinToString("")
+}
+
+inline fun <reified T: Number> T?.multiply(multiplier: Int): T {
     return this?.let {
-        it * multiplier
-    } ?: 0
+        when (it) {
+            is Int -> (it * multiplier) as T
+            is Long -> (it * multiplier) as T
+            is Float -> (it * multiplier) as T
+            is Double -> (it * multiplier) as T
+            is Short -> (it * multiplier) as T
+            is Byte -> (it * multiplier) as T
+            else -> throw UnsupportedOperationException("Unsupported type")
+        }
+    } ?: 0 as T
 }
 
 // TODO: move to utils

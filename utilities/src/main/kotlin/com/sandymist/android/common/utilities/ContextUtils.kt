@@ -1,3 +1,4 @@
+@file:Suppress("unused")
 package com.sandymist.android.common.utilities
 
 import android.app.Activity
@@ -8,7 +9,7 @@ import android.content.pm.PackageManager
 
 fun Context.getAppVersion(): String {
     return try {
-        packageManager.getPackageInfo(packageName, 0).versionName
+        packageManager.getPackageInfo(packageName, 0).versionName ?: ""
     } catch (e: PackageManager.NameNotFoundException) {
         "Unknown"
     }

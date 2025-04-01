@@ -1,4 +1,14 @@
 <resources>
+    <string name="no_connection">No connection</string>
+    <string name="retry">Retry</string>
+    <string name="error">Error</string>
+    <string name="loading">Loading …</string>
+    <string name="check_connectivity">Check connectivity</string>
+    <string name="unable_to_obtain_content">Unable to obtain content</string>
+    <string name="no_content_found">No content found</string>
+    <string name="lost_network_connection">Lost network connection</string>
+    <string name="got_connected">Got connected</string>
+
     <string name="hr">hr</string>
     <string name="hrs">hrs</string>
     <string name="min">min</string>
