@@ -1,3 +1,3 @@
-# Common Android Utilties
+# Library with commonly used Android functions
 
-TBD
+Often used constructs including helper/utility functions, classes, and Composables.
